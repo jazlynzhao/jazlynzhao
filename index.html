@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Jazlyn Practice · 英语口语练习</title>
+  <style>
+    :root {
+      --bg1: #f8f3eb;
+      --bg2: #edf2f8;
+      --card: #ffffff;
+      --ink: #2d2a26;
+      --muted: #8d8579;
+      --accent: #e07a5f;
+      --accent-dark: #c96145;
+      --green: #3f8c6f;
+      --gold: #c08a3e;
+      --border: #e8e0d4;
+      --soft: #faf6ef;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { overflow-x: hidden; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px 18px;
+      padding-bottom: calc(24px + env(safe-area-inset-bottom));
+      -webkit-text-size-adjust: 100%;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 760px;
+      background: var(--card);
+      border-radius: 22px;
+      box-shadow: 0 20px 55px rgba(70, 58, 42, 0.14);
+      padding: 38px 46px 32px;
+    }
+
+    .header { text-align: center; margin-bottom: 24px; }
+    .header h1 { margin: 0; font-size: 30px; letter-spacing: 1px; overflow-wrap: anywhere; }
+    .header h1 .accent { color: var(--accent); }
+    .header p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
+
+    .difficulty-row { display: flex; justify-content: center; margin-bottom: 18px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+    .badge.lv1 .dot { background: #5da86b; }
+    .badge.lv2 .dot { background: var(--gold); }
+    .badge.lv3 .dot { background: var(--accent); }
+
+    .sentence-box {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 18px;
+    }
+    .col-label {
+      margin: 0 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .sentence {
+      margin: 0;
+      font-size: 23px;
+      line-height: 1.65;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    .source { margin: 14px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
+    .source b { color: var(--accent); font-weight: 600; }
+
+    .btn-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 11px 24px;
+      touch-action: manipulation;
+      transition: background 0.18s, transform 0.08s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .btn.ghost { background: #fff; border: 1.5px solid var(--accent); color: var(--accent); }
+    .btn.ghost:hover:not(:disabled) { background: #fdf0eb; }
+    .btn.secondary { background: #eee9e1; color: var(--ink); }
+    .btn.secondary:hover:not(:disabled) { background: #e4ddd2; }
+
+    .en-box {
+      background: #f2f7f4;
+      border: 1px solid #dcebe2;
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 18px;
+      animation: fadeIn 0.35s ease;
+    }
+    .en-box .col-label { color: var(--green); }
+    .translation {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.65;
+      font-weight: 500;
+      color: #244b3c;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .answer-area { margin-bottom: 18px; }
+    .answer-area label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .answer-area textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid var(--border);
+      background: transparent;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--ink);
+      padding: 8px 2px;
+      resize: none;
+      outline: none;
+      overflow: hidden;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+    .answer-area textarea:focus { border-bottom-color: var(--accent); }
+    .answer-area textarea::placeholder { color: #c4bdb1; }
+
+    .result {
+      margin-top: 16px;
+      background: #fbf8f2;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 20px;
+      animation: fadeIn 0.3s ease;
+    }
+    .score-line { margin: 0 0 12px; font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
+    .score-line .num { font-size: 26px; margin-right: 2px; }
+    .two-col { display: flex; gap: 20px; }
+    .two-col > div { flex: 1 1 50%; min-width: 0; }
+    .lbl { margin: 0 0 5px; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--muted); }
+    .val { margin: 0; font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; word-break: break-word; }
+    .val.mine { color: #6b4f35; }
+    .val.std { color: #244b3c; }
+
+    .refresh {
+      position: fixed;
+      right: 28px;
+      bottom: 28px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(224, 122, 95, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.18s, transform 0.35s ease;
+      z-index: 10;
+    }
+    .refresh:hover { background: var(--accent-dark); transform: rotate(180deg); }
+    .refresh:active { transform: rotate(180deg) scale(0.94); }
+    .refresh svg { width: 26px; height: 26px; }
+
+    @media (max-width: 640px) {
+      .card { padding: 26px 20px 26px; border-radius: 18px; }
+      .sentence { font-size: 21px; }
+      .translation { font-size: 18px; }
+      .two-col { flex-direction: column; gap: 14px; }
+      .refresh { right: 18px; bottom: 18px; width: 54px; height: 54px; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 24px 16px 28px; }
+      .header h1 { font-size: 26px; }
+      .sentence { font-size: 20px; line-height: 1.7; }
+      .translation { font-size: 17px; line-height: 1.7; }
+      .sentence-box, .en-box { padding: 18px 16px; }
+      .btn { padding: 11px 18px; font-size: 14px; }
+      .btn-row { gap: 10px; }
+      .answer-area textarea { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <header class="header">
+      <h1>Jazlyn <span class="accent">Practice</span></h1>
+      <p>英语口语练习 · 先自己翻译，再对照参考答案</p>
+    </header>
+
+    <div class="difficulty-row">
+      <span class="badge lv1" id="levelBadge"><span class="dot"></span><span id="levelText">初级</span></span>
+    </div>
+
+    <div class="sentence-box">
+      <p class="col-label">中文句子</p>
+      <p class="sentence" id="sentence">加载中…</p>
+      <p class="source" id="source" hidden></p>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn ghost" id="translateBtn">翻译</button>
+      <button class="btn secondary" id="compareBtn">对比答案</button>
+    </div>
+
+    <div class="en-box" id="enBox" hidden>
+      <p class="col-label">参考答案 English</p>
+      <p class="translation" id="translationText"></p>
+    </div>
+
+    <div class="answer-area">
+      <label for="userInput">我的翻译（写在横线上）</label>
+      <textarea id="userInput" rows="1" placeholder="在这里写下你的英文翻译……"></textarea>
+    </div>
+
+    <div class="result" id="result" hidden>
+      <p class="score-line" id="scoreLine"></p>
+      <div class="two-col">
+        <div>
+          <p class="lbl">你的翻译</p>
+          <p class="val mine" id="myAnswer"></p>
+        </div>
+        <div>
+          <p class="lbl">参考答案</p>
+          <p class="val std" id="stdAnswer"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <button class="refresh" id="refreshBtn" title="换一句" aria-label="刷新句子">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12a9 9 0 1 1-2.64-6.36" />
+      <path d="M21 3v6h-6" />
+    </svg>
+  </button>
+
+  <script>
+    // 经典美剧台词（固定，带原版英文与出处）
+    const TV_QUOTES = [
+      { zh: "我们当时处于分手状态！", level: 2, en: "We were on a break!", src: "《老友记》Friends" },
+      { zh: "最近怎么样？", level: 1, en: "How you doin'?", src: "《老友记》Friends" },
+      { zh: "转！转！转！", level: 2, en: "Pivot! Pivot! Pivot!", src: "《老友记》Friends" },
+      { zh: "这并不常见，不是每个男人都会遇到，而且这确实是件大事！", level: 3, en: "It's not that common, it doesn't happen to every guy, and it IS a big deal!", src: "《老友记》Friends" },
+      { zh: "欢迎来到现实世界，它糟透了，但你会爱上它的。", level: 3, en: "Welcome to the real world. It sucks. You're gonna love it.", src: "《老友记》Friends" },
+      { zh: "我会一直陪着你。", level: 1, en: "I'll be there for you.", src: "《老友记》Friends" },
+      { zh: "开玩笑的啦！", level: 1, en: "Bazinga!", src: "《生活大爆炸》The Big Bang Theory" },
+      { zh: "那是我的座位。", level: 1, en: "That's my spot.", src: "《生活大爆炸》The Big Bang Theory" },
+      { zh: "我不疯，我妈带我去测过。", level: 3, en: "I'm not crazy. My mother had me tested.", src: "《生活大爆炸》The Big Bang Theory" },
+      { zh: "软软的猫咪，暖暖的猫咪，乖乖睡在窝里。", level: 2, en: "Soft kitty, warm kitty, little ball of fur.", src: "《生活大爆炸》The Big Bang Theory" },
+      { zh: "凛冬将至。", level: 1, en: "Winter is coming.", src: "《权力的游戏》Game of Thrones" },
+      { zh: "你什么都不懂，琼恩·雪诺。", level: 2, en: "You know nothing, Jon Snow.", src: "《权力的游戏》Game of Thrones" },
+      { zh: "你玩权力的游戏，要么赢，要么死。", level: 3, en: "When you play the game of thrones, you win or you die.", src: "《权力的游戏》Game of Thrones" },
+      { zh: "凡人皆有一死。", level: 2, en: "Valar morghulis.", src: "《权力的游戏》Game of Thrones" },
+      { zh: "兰尼斯特有债必偿。", level: 2, en: "A Lannister always pays his debts.", src: "《权力的游戏》Game of Thrones" },
+      { zh: "不是今天。", level: 2, en: "Not today.", src: "《权力的游戏》Game of Thrones" },
+      { zh: "我才是敲门的那个人。", level: 3, en: "I am the one who knocks.", src: "《绝命毒师》Breaking Bad" },
+      { zh: "说出我的名字。", level: 1, en: "Say my name.", src: "《绝命毒师》Breaking Bad" },
+      { zh: "对，科学！", level: 1, en: "Yeah, science!", src: "《绝命毒师》Breaking Bad" },
+      { zh: "我是为了自己才这么做的。", level: 2, en: "I did it for me.", src: "《绝命毒师》Breaking Bad" },
+      { zh: "小心行事。", level: 2, en: "Tread lightly.", src: "《绝命毒师》Breaking Bad" },
+      { zh: "这会是传奇——等着瞧——级别的！", level: 3, en: "It's gonna be legen—wait for it—dary!", src: "《老爸老妈浪漫史》How I Met Your Mother" },
+      { zh: "穿上西装！", level: 1, en: "Suit up!", src: "《老爸老妈浪漫史》How I Met Your Mother" },
+      { zh: "接受挑战！", level: 1, en: "Challenge accepted!", src: "《老爸老妈浪漫史》How I Met Your Mother" },
+      { zh: "我是那个很酷的爸爸。", level: 2, en: "I'm the cool dad.", src: "《摩登家庭》Modern Family" }
+    ];
+
+    // 生活情景句模板：随机填槽生成中文，再交给在线翻译接口
+    const SCENARIO_TEMPLATES = [
+      { text: "我要一杯{size}的{drink}，{opt}。", level: 1, slots: { size: ["大杯", "中杯", "小杯"], drink: ["冰美式", "拿铁", "卡布奇诺", "柠檬茶", "奶茶", "气泡水", "橙汁", "摩卡", "抹茶拿铁", "美式", "椰子水", "热巧克力"], opt: ["不加糖", "少冰", "多放奶", "正常甜度", "去冰", "常温"] } },
+      { text: "我想点一份{food}，{note}。", level: 1, slots: { food: ["麻辣烫", "牛肉面", "扬州炒饭", "汉堡套餐", "蔬菜沙拉", "小笼包", "水饺", "蛋炒饭", "火锅", "烤鱼", "披萨", "意面", "寿司", "三明治", "皮蛋瘦肉粥", "煎饼果子", "螺蛳粉", "黄焖鸡米饭", "炸鸡", "关东煮"], note: ["不要香菜", "少放辣", "多放辣", "不放葱", "打包带走", "少放盐", "多放酱", "不要蒜"] } },
+      { text: "我想点{num}份{food}，{note}。", level: 2, slots: { num: ["#1-3"], food: ["麻辣烫", "牛肉面", "扬州炒饭", "水饺", "煎饼果子", "螺蛳粉", "黄焖鸡米饭", "炸鸡"], note: ["不要香菜", "少放辣", "多放辣", "不放葱", "打包带走", "少放盐"] } },
+      { text: "这道菜可以做得{adj}一点吗？", level: 1, slots: { adj: ["不那么辣", "清淡", "少盐", "再熟", "不要太油"] } },
+      { text: "我们一共{num}个人，有{seat}的位子吗？", level: 2, slots: { num: ["#2-8"], seat: ["靠窗", "安静", "有包间", "不靠门"] } },
+      { text: "这件{item}有{size}码的吗？", level: 1, slots: { item: ["衬衫", "外套", "牛仔裤", "运动鞋", "连衣裙", "T恤", "卫衣", "西装", "帽子", "围巾", "短裤", "风衣"], size: ["S", "M", "L", "XL"] } },
+      { text: "这双{shoes}能试一下吗？我想换一双再{bigger}一码的。", level: 2, slots: { shoes: ["运动鞋", "靴子", "皮鞋", "凉鞋"], bigger: ["大", "小"] } },
+      { text: "我不太喜欢这个颜色，有没有{colors}的？", level: 2, slots: { colors: ["黑色或者米色", "深蓝色", "浅灰色", "白色", "军绿色", "酒红色"] } },
+      { text: "这件{clothing}可以退吗？小票我还留着。", level: 2, slots: { clothing: ["衣服", "外套", "裙子", "裤子", "帽子"] } },
+      { text: "这件{item}能打折吗？能打到{num}折吗？", level: 2, slots: { item: ["衣服", "鞋子", "外套", "裤子", "裙子", "背包"], num: ["#5-9"] } },
+      { text: "现在有优惠活动吗？买{num}件打几折？", level: 2, slots: { num: ["两", "三"] } },
+      { text: "请问去{place}怎么走？", level: 1, slots: { place: ["地铁站", "机场", "市中心", "火车站", "医院", "商场", "图书馆", "高铁站", "最近的银行", "邮局", "学校", "公园"] } },
+      { text: "从这里打车到{place}大概要多久？", level: 2, slots: { place: ["机场", "火车站", "市中心", "高铁站", "医院", "商场", "学校"] } },
+      { text: "附近有没有{attr}的{shop}？", level: 2, slots: { attr: ["口碑好", "性价比高", "本地人常去"], shop: ["餐厅", "咖啡店", "小吃店", "火锅店", "甜品店", "面馆"] } },
+      { text: "我想买一张去{dest}的{transport}票，怎么{action}？", level: 2, slots: { dest: ["市中心", "机场", "景区", "高铁站", "大学城"], transport: ["地铁", "大巴", "高铁"], action: ["充值", "取票", "购票"] } },
+      { text: "我要办理飞{dest}的航班值机，这是我的护照。", level: 2, slots: { dest: ["北京", "上海", "广州", "成都", "深圳", "杭州"] } },
+      { text: "我想选一个{seatType}的座位，还有吗？", level: 2, slots: { seatType: ["靠过道", "靠窗", "靠前"] } },
+      { text: "这个{luggage}能带上飞机吗，还是必须托运？", level: 2, slots: { luggage: ["行李箱", "背包", "登机箱"] } },
+      { text: "我的航班{status}了，下一班最早是几点？", level: 2, slots: { status: ["延误", "取消"] } },
+      { text: "我订了一间{roomType}，帮我办一下入住。", level: 2, slots: { roomType: ["大床房", "双床房", "套房", "海景房"] } },
+      { text: "空调好像坏了，能派人{action}吗？", level: 2, slots: { action: ["上来看一下", "来修一下"] } },
+      { text: "我想{delay}退房，可以吗？", level: 2, slots: { delay: ["延迟到下午两点", "晚一点"] } },
+      { text: "能帮我寄存一下行李吗？我{when}回来取。", level: 2, slots: { when: ["下午", "晚上", "明天早上", "中午"] } },
+      { text: "你{when}一般喜欢做点什么？", level: 2, slots: { when: ["周末", "下班后", "放假"] } },
+      { text: "我们之前是不是在哪儿见过？你看着很{adj}。", level: 2, slots: { adj: ["眼熟", "面熟"] } },
+      { text: "下次有机会一起{activity}，我请客。", level: 2, slots: { activity: ["吃饭", "喝咖啡", "看电影", "逛街", "爬山", "看展", "吃火锅", "喝奶茶", "打羽毛球", "去公园", "看演唱会", "吃烧烤"] } },
+      { text: "关于{project}，我想补充一点我的{aspect}。", level: 2, slots: { project: ["这个方案", "这个项目", "这个计划"], aspect: ["看法", "顾虑", "建议"] } },
+      { text: "这个方案方向是对的，但{concern}可能超了。", level: 2, slots: { concern: ["预算", "时间", "人手"] } },
+      { text: "大家还有什么问题吗？没有的话我们就{action}。", level: 2, slots: { action: ["散会", "进入下一项"] } },
+      { text: "这个项目我们得在{time}之前定下来，不能再拖了。", level: 3, slots: { time: ["周五", "月底", "下周"] } },
+      { text: "师傅，去{place}，麻烦开一下后备箱。", level: 2, slots: { place: ["机场", "火车站", "市中心", "医院", "高铁站"] } },
+      { text: "前面路口{dir1}，然后{dir2}左转。", level: 2, slots: { dir1: ["右转", "直行"], dir2: ["第二个红绿灯", "下个路口"] } },
+      { text: "师傅能开快一点吗？我快{reason}了。", level: 2, slots: { reason: ["赶不上", "迟到了"] } },
+      { text: "这个包裹寄到{city}，{num}天内能到吗？", level: 2, slots: { city: ["上海", "北京", "广州", "深圳", "成都", "杭州"], num: ["#2-7"] } },
+      { text: "我有点{symptom}，该挂哪个科？", level: 2, slots: { symptom: ["头疼", "嗓子疼", "肚子不舒服", "发烧", "咳嗽"] } },
+      { text: "这个药一天吃{num}次，饭前还是饭后？", level: 2, slots: { num: ["两", "三"] } },
+      { text: "我这两天{feeling}，真想{action}。", level: 2, slots: { feeling: ["累坏了", "压力很大", "有点emo"], action: ["好好睡一觉", "出去走走"] } },
+      { text: "能帮我一个忙吗？我想{thing}。", level: 1, slots: { thing: ["打印一下这份文件", "查一下我的快递到哪了", "翻译一下这句话"] } },
+      { text: "你为什么会选择我们{company}？", level: 2, slots: { company: ["公司", "团队", "行业"] } },
+      { text: "你觉得你最大的{aspect}是什么？", level: 2, slots: { aspect: ["优点", "缺点", "优势"] } },
+      { text: "帮我剪短一点，{part}再打薄一些。", level: 2, slots: { part: ["两边", "后面", "刘海"] } },
+      { text: "我想练{body}，能推荐几个动作吗？", level: 2, slots: { body: ["腹肌", "手臂", "背", "腿"] } },
+      { text: "我要开一张新卡，需要带什么证件？", level: 2, slots: {} },
+      { text: "我的快递显示已签收，但我没收到，怎么办？", level: 3, slots: {} },
+      { text: "今天{weather}，出门记得带{thing}。", level: 2, slots: { weather: ["要下雨", "风很大", "很冷", "很热"], thing: ["伞", "外套", "帽子", "水"] } },
+      { text: "我们{time}在{place}见，怎么样？", level: 2, slots: { time: ["下午三点", "晚上七点", "明天中午"], place: ["老地方", "咖啡店", "地铁口"] } },
+      { text: "我的手机{problem}了，能帮我看看吗？", level: 2, slots: { problem: ["连不上网", "死机", "没电", "进水"] } },
+      { text: "这件事让我{emotion}，真的{reaction}。", level: 2, slots: { emotion: ["很生气", "特别开心", "有点失望"], reaction: ["无语了", "睡不着", "想哭"] } }
+    ];
+
+    // 网感句模板：随机填槽生成中文，再交给在线翻译接口
+    const INTERNET_TEMPLATES = [
+      { text: "我昨天刷到一条视频，{content}，直接{reaction}。", level: 2, slots: { content: ["博主三秒就火了", "up主直播翻车", "素人改造太惊艳", "剪辑太丝滑", "一只猫突然抢镜", "主播读评论读到破防"], reaction: ["破防了", "上头了", "笑到不行", "起了一身鸡皮疙瘩", "直接收藏"] } },
+      { text: "他发的那条动态，评论区全是{slang}。", level: 1, slots: { slang: ["玩梗", "求攻略", "催更", "彩虹屁", "嘴替", "破防"] } },
+      { text: "这个{meme}太好笑了，我直接转发给了所有朋友。", level: 2, slots: { meme: ["表情包", "梗图", "段子", "切片", "二创"] } },
+      { text: "这条视频之所以爆火，是因为它的{thing}太上头了。", level: 2, slots: { thing: ["BGM", "节奏", "文案", "封面", "配音", "梗"] } },
+      { text: "如果{action}，粉丝就会{result}。", level: 2, slots: { action: ["你长期不更新", "内容同质化太严重"], result: ["掉", "取关你"] } },
+      { text: "很多人嘴上说着{word1}，身体却很诚实地在{word2}。", level: 3, slots: { word1: ["摆烂", "躺平", "早睡", "减肥"], word2: ["凌晨三点回复工作消息", "周末还在加班", "熬夜刷手机", "半夜点外卖"] } },
+      { text: "当{word}这个词开始刷屏，越来越多年轻人开始反思{thing}。", level: 3, slots: { word: ["班味", "精神内耗", "松弛感", "边界感"], thing: ["工作与生活的边界", "自己的状态", "生活方式"] } },
+      { text: "这种{style}之所以流行，是因为它用{means}对抗了生活的压力。", level: 3, slots: { style: ["多巴胺穿搭", "氛围感拍照", "citywalk", "老钱风"], means: ["色彩", "松弛感", "慢节奏"] } },
+      { text: "我关注的这个账号，每天都在更新{thing}。", level: 1, slots: { thing: ["电子榨菜", "沉浸式收纳", "一人食vlog", "宠物日常"] } },
+      { text: "她直播时说的那句话，被剪成了无数个{thing}。", level: 2, slots: { thing: ["二创视频", "切片", "表情包"] } },
+      { text: "他一开直播，{thing}就刷屏了。", level: 1, slots: { thing: ["礼物", "弹幕", "评论"] } },
+      { text: "这条{thing}爆了以后，好多品牌都跑来蹭热度。", level: 2, slots: { thing: ["热搜", "视频", "梗"] } },
+      { text: "我一直以为这个{thing}已经过时了，结果它又翻红了。", level: 2, slots: { thing: ["梗", "段子", "表情包"] } },
+      { text: "那场直播翻车以后，他连夜发了一条{thing}。", level: 2, slots: { thing: ["道歉视频", "澄清声明", "长文回应"] } },
+      { text: "他晒出的那组{thing}，评论区全是'求攻略'。", level: 1, slots: { thing: ["旅行照", "穿搭图", "健身对比图", "毕业照"] } },
+      { text: "这个{thing}真的太{adj}了，我看完直接转发。", level: 2, slots: { thing: ["视频", "段子", "帖子"], adj: ["抽象", "离谱", "上头"] } },
+      { text: "刷到这条{thing}，我瞬间{reaction}。", level: 2, slots: { thing: ["热搜", "新闻", "动态"], reaction: ["清醒了", "破防了", "释怀了"] } },
+      { text: "评论区有人说{comment}，我直接{reaction}。", level: 2, slots: { comment: ["这波不亏", "求链接", "学到了"], reaction: ["点赞", "收藏", "笑死"] } },
+      { text: "这个博主{action}，粉丝直接{result}。", level: 2, slots: { action: ["停更了一个月", "换了风格", "官宣恋情"], result: ["破防", "取关", "送上祝福"] } },
+      { text: "当{word}成为一种常态，{thing}。", level: 3, slots: { word: ["内卷", "摆烂", "加班"], thing: ["大家开始重新思考生活", "年轻人越来越想逃离", "打工人开始觉醒"] } }
+    ];
+
+    const LEVELS = { 1: { text: "初级", cls: "lv1" }, 2: { text: "中级", cls: "lv2" }, 3: { text: "高级", cls: "lv3" } };
+
+    const sentenceEl = document.getElementById("sentence");
+    const levelBadge = document.getElementById("levelBadge");
+    const levelText = document.getElementById("levelText");
+    const sourceEl = document.getElementById("source");
+    const enBox = document.getElementById("enBox");
+    const translationText = document.getElementById("translationText");
+    const translateBtn = document.getElementById("translateBtn");
+    const compareBtn = document.getElementById("compareBtn");
+    const userInput = document.getElementById("userInput");
+    const result = document.getElementById("result");
+    const scoreLine = document.getElementById("scoreLine");
+    const myAnswer = document.getElementById("myAnswer");
+    const stdAnswer = document.getElementById("stdAnswer");
+    const refreshBtn = document.getElementById("refreshBtn");
+
+    let current = null;
+    let lastZh = "";
+    let translating = false;
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function pickFrom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function fillSlot(val) {
+      const m = /^#(\d+)-(\d+)$/.exec(val);
+      if (m) return String(randomInt(parseInt(m[1], 10), parseInt(m[2], 10)));
+      return val;
+    }
+
+    function renderTemplate(tpl) {
+      let s = tpl.text;
+      for (const key in tpl.slots) {
+        s = s.replace("{" + key + "}", fillSlot(pickFrom(tpl.slots[key])));
+      }
+      return { zh: s, level: tpl.level };
+    }
+
+    function genScenario() {
+      return renderTemplate(pickFrom(SCENARIO_TEMPLATES));
+    }
+
+    function genInternet() {
+      return renderTemplate(pickFrom(INTERNET_TEMPLATES));
+    }
+
+    function pickSentence() {
+      for (let attempt = 0; attempt < 30; attempt++) {
+        let item;
+        const roll = Math.random();
+        if (roll < 0.25) {
+          item = pickFrom(TV_QUOTES);
+        } else if (roll < 0.65) {
+          item = genScenario();
+        } else {
+          item = genInternet();
+        }
+        if (item.zh !== lastZh) {
+          lastZh = item.zh;
+          return item;
+        }
+      }
+      return genScenario();
+    }
+
+    function renderSentence(item) {
+      current = item;
+      sentenceEl.textContent = item.zh;
+      const lv = LEVELS[item.level];
+      levelText.textContent = lv.text;
+      levelBadge.className = "badge " + lv.cls;
+      if (item.src) {
+        sourceEl.innerHTML = "出处：<b>" + item.src + "</b>";
+        sourceEl.hidden = false;
+      } else {
+        sourceEl.hidden = true;
+        sourceEl.innerHTML = "";
+      }
+      hideTranslation();
+      userInput.value = "";
+      autoGrow();
+      result.hidden = true;
+      translateBtn.textContent = "翻译";
+      translateBtn.disabled = false;
+      compareBtn.disabled = false;
+    }
+
+    function showTranslation(text) {
+      translationText.textContent = text;
+      enBox.hidden = false;
+    }
+
+    function hideTranslation() {
+      enBox.hidden = true;
+      translationText.textContent = "";
+    }
+
+    async function fetchTranslation(text) {
+      const src = encodeURIComponent(text);
+      const providers = [
+        // 首选：谷歌翻译（挂 VPN 时可用）
+        async () => {
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), 5000);
+          try {
+            const r = await fetch(
+              "https://translate.googleapis.com/translate_a/single?client=gtx&sl=zh-CN&tl=en&dt=t&q=" + src,
+              { signal: controller.signal }
+            );
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            const d = await r.json();
+            const parts = (Array.isArray(d[0]) ? d[0] : []).map((seg) => seg && seg[0]).filter(Boolean);
+            const out = parts.join("");
+            if (!out) throw new Error("empty");
+            return out;
+          } finally {
+            clearTimeout(timer);
+          }
+        },
+        // 备用：MyMemory（国内不挂 VPN 一般可直连）
+        async () => {
+          const r = await fetch("https://api.mymemory.translated.net/get?q=" + src + "&langpair=zh-CN|en");
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          const d = await r.json();
+          const out = d && d.responseData && d.responseData.translatedText;
+          if (!out || out.startsWith("MYMEMORY WARNING")) throw new Error("empty");
+          return out;
+        }
+      ];
+
+      let lastErr;
+      for (const provider of providers) {
+        try {
+          return await provider();
+        } catch (e) {
+          lastErr = e;
+        }
+      }
+      throw lastErr || new Error("translate failed");
+    }
+
+    async function getAnswer() {
+      if (current && current.en) return current.en;
+      return await fetchTranslation(current.zh);
+    }
+
+    translateBtn.addEventListener("click", async () => {
+      if (!current || translating) return;
+      translating = true;
+      translateBtn.disabled = true;
+      translateBtn.textContent = "翻译中…";
+      try {
+        const t = await getAnswer();
+        showTranslation(t);
+        translateBtn.textContent = "已翻译";
+      } catch (e) {
+        translationText.textContent = "翻译失败，请稍后重试或检查网络。";
+        enBox.hidden = false;
+        translateBtn.textContent = "重试";
+      } finally {
+        translating = false;
+        translateBtn.disabled = false;
+      }
+    });
+
+    function normalize(s) {
+      return (s || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\s']/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function similarity(a, b) {
+      const A = normalize(a).split(" ").filter(Boolean);
+      const B = normalize(b).split(" ").filter(Boolean);
+      if (!A.length || !B.length) return 0;
+      const setA = new Set(A);
+      let matches = 0;
+      for (const w of B) if (setA.has(w)) matches++;
+      const union = new Set([...A, ...B]);
+      const jaccard = matches / union.size;
+      const ratio = Math.min(A.length, B.length) / Math.max(A.length, B.length);
+      return Math.round(100 * (0.7 * jaccard + 0.3 * ratio));
+    }
+
+    compareBtn.addEventListener("click", async () => {
+      if (!current) return;
+      const mine = userInput.value.trim();
+      if (!mine) {
+        userInput.focus();
+        return;
+      }
+      compareBtn.disabled = true;
+      compareBtn.textContent = "获取中…";
+      try {
+        const answer = await getAnswer();
+        const score = similarity(mine, answer);
+        myAnswer.textContent = mine;
+        stdAnswer.textContent = answer;
+
+        let color, comment;
+        if (score >= 80) { color = "#3f8c6f"; comment = "很棒！意思非常接近参考答案 🎉"; }
+        else if (score >= 50) { color = "#c08a3e"; comment = "思路对了，再对照一下细节和表达 👍"; }
+        else { color = "#c96145"; comment = "差距较大，看看参考答案是怎么表达的 💪"; }
+
+        scoreLine.innerHTML =
+          '相似度 <span class="num" style="color:' + color + '">' + score +
+          '%</span> · ' + comment;
+        result.hidden = false;
+      } catch (e) {
+        alert("参考答案获取失败，请稍后重试或检查网络。");
+      } finally {
+        compareBtn.disabled = false;
+        compareBtn.textContent = "对比答案";
+      }
+    });
+
+    function autoGrow() {
+      userInput.style.height = "auto";
+      userInput.style.height = Math.min(userInput.scrollHeight, 200) + "px";
+    }
+    userInput.addEventListener("input", autoGrow);
+
+    function keepInputVisible() {
+      if (document.activeElement !== userInput) return;
+      setTimeout(() => {
+        userInput.scrollIntoView({ block: "end", behavior: "smooth" });
+      }, 200);
+    }
+    userInput.addEventListener("focus", () => {
+      refreshBtn.style.display = "none";
+      keepInputVisible();
+    });
+    userInput.addEventListener("blur", () => {
+      refreshBtn.style.display = "flex";
+    });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", keepInputVisible);
+    }
+
+    function refresh() {
+      renderSentence(pickSentence());
+    }
+    refreshBtn.addEventListener("click", refresh);
+
+    renderSentence(pickSentence());
+  </script>
+</body>
+</html>
