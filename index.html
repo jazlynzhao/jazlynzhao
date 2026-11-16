@@ -18,11 +18,8 @@
       --border: #e8e0d4;
       --soft: #faf6ef;
     }
-
     * { box-sizing: border-box; }
-
     html, body { overflow-x: hidden; }
-
     body {
       margin: 0;
       min-height: 100vh;
@@ -36,7 +33,6 @@
       padding-bottom: calc(24px + env(safe-area-inset-bottom));
       -webkit-text-size-adjust: 100%;
     }
-
     .card {
       width: 100%;
       max-width: 760px;
@@ -45,66 +41,38 @@
       box-shadow: 0 20px 55px rgba(70, 58, 42, 0.14);
       padding: 38px 46px 32px;
     }
-
     .header { text-align: center; margin-bottom: 24px; }
     .header h1 { margin: 0; font-size: 30px; letter-spacing: 1px; overflow-wrap: anywhere; }
     .header h1 .accent { color: var(--accent); }
     .header p { margin: 8px 0 0; color: var(--muted); font-size: 14px; }
-
     .difficulty-row { display: flex; justify-content: center; margin-bottom: 18px; }
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 999px;
-      background: var(--soft);
-      color: var(--muted);
+      display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600;
+      padding: 6px 16px; border-radius: 999px; background: var(--soft); color: var(--muted);
       border: 1px solid var(--border);
     }
     .badge .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
     .badge.lv1 .dot { background: #5da86b; }
     .badge.lv2 .dot { background: var(--gold); }
     .badge.lv3 .dot { background: var(--accent); }
-
     .sentence-box {
-      background: var(--soft);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 24px;
-      margin-bottom: 18px;
+      background: var(--soft); border: 1px solid var(--border); border-radius: 16px;
+      padding: 22px 24px; margin-bottom: 18px;
     }
     .col-label {
-      margin: 0 0 12px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      color: var(--muted);
-      text-transform: uppercase;
+      margin: 0 0 12px; font-size: 12px; font-weight: 600; letter-spacing: 2px;
+      color: var(--muted); text-transform: uppercase;
     }
     .sentence {
-      margin: 0;
-      font-size: 23px;
-      line-height: 1.65;
-      font-weight: 600;
-      overflow-wrap: anywhere;
-      word-break: break-word;
+      margin: 0; font-size: 23px; line-height: 1.65; font-weight: 600;
+      overflow-wrap: anywhere; word-break: break-word;
     }
     .source { margin: 14px 0 0; font-size: 13px; line-height: 1.6; color: var(--muted); overflow-wrap: anywhere; }
     .source b { color: var(--accent); font-weight: 600; }
-
     .btn-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 16px; flex-wrap: wrap; }
     .btn {
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 15px;
-      font-weight: 600;
-      border-radius: 12px;
-      padding: 11px 24px;
-      touch-action: manipulation;
+      border: none; cursor: pointer; font-family: inherit; font-size: 15px; font-weight: 600;
+      border-radius: 12px; padding: 11px 24px; touch-action: manipulation;
       transition: background 0.18s, transform 0.08s;
     }
     .btn:active { transform: translateY(1px); }
@@ -113,58 +81,31 @@
     .btn.ghost:hover:not(:disabled) { background: #fdf0eb; }
     .btn.secondary { background: #eee9e1; color: var(--ink); }
     .btn.secondary:hover:not(:disabled) { background: #e4ddd2; }
-
     .en-box {
-      background: #f2f7f4;
-      border: 1px solid #dcebe2;
-      border-radius: 16px;
-      padding: 20px 24px;
-      margin-bottom: 18px;
-      animation: fadeIn 0.35s ease;
+      background: #f2f7f4; border: 1px solid #dcebe2; border-radius: 16px;
+      padding: 20px 24px; margin-bottom: 18px; animation: fadeIn 0.35s ease;
     }
     .en-box .col-label { color: var(--green); }
     .translation {
-      margin: 0;
-      font-size: 19px;
-      line-height: 1.65;
-      font-weight: 500;
-      color: #244b3c;
-      overflow-wrap: anywhere;
-      word-break: break-word;
+      margin: 0; font-size: 19px; line-height: 1.65; font-weight: 500; color: #244b3c;
+      overflow-wrap: anywhere; word-break: break-word;
     }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .answer-area { margin-bottom: 18px; }
     .answer-area label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
     .answer-area textarea {
-      width: 100%;
-      border: none;
-      border-bottom: 2px solid var(--border);
-      background: transparent;
-      font-size: 18px;
-      line-height: 1.6;
-      color: var(--ink);
-      padding: 8px 2px;
-      resize: none;
-      outline: none;
-      overflow: hidden;
-      font-family: inherit;
-      transition: border-color 0.2s;
+      width: 100%; border: none; border-bottom: 2px solid var(--border); background: transparent;
+      font-size: 18px; line-height: 1.6; color: var(--ink); padding: 8px 2px; resize: none;
+      outline: none; overflow: hidden; font-family: inherit; transition: border-color 0.2s;
     }
     .answer-area textarea:focus { border-bottom-color: var(--accent); }
     .answer-area textarea::placeholder { color: #c4bdb1; }
-
     .result {
-      margin-top: 16px;
-      background: #fbf8f2;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px 20px;
-      animation: fadeIn 0.3s ease;
+      margin-top: 16px; background: #fbf8f2; border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 20px; animation: fadeIn 0.3s ease;
     }
     .score-line { margin: 0 0 12px; font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
     .score-line .num { font-size: 26px; margin-right: 2px; }
@@ -174,29 +115,15 @@
     .val { margin: 0; font-size: 15px; line-height: 1.6; overflow-wrap: anywhere; word-break: break-word; }
     .val.mine { color: #6b4f35; }
     .val.std { color: #244b3c; }
-
     .refresh {
-      position: fixed;
-      right: 28px;
-      bottom: 28px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 12px 26px rgba(224, 122, 95, 0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.18s, transform 0.35s ease;
-      z-index: 10;
+      position: fixed; right: 28px; bottom: 28px; width: 60px; height: 60px; border-radius: 50%;
+      border: none; background: var(--accent); color: #fff; cursor: pointer;
+      box-shadow: 0 12px 26px rgba(224, 122, 95, 0.45); display: flex; align-items: center;
+      justify-content: center; transition: background 0.18s, transform 0.35s ease; z-index: 10;
     }
     .refresh:hover { background: var(--accent-dark); transform: rotate(180deg); }
     .refresh:active { transform: rotate(180deg) scale(0.94); }
     .refresh svg { width: 26px; height: 26px; }
-
     @media (max-width: 640px) {
       .card { padding: 26px 20px 26px; border-radius: 18px; }
       .sentence { font-size: 21px; }
@@ -204,7 +131,6 @@
       .two-col { flex-direction: column; gap: 14px; }
       .refresh { right: 18px; bottom: 18px; width: 54px; height: 54px; }
     }
-
     @media (max-width: 480px) {
       .card { padding: 24px 16px 28px; }
       .header h1 { font-size: 26px; }
@@ -223,32 +149,26 @@
       <h1>Jazlyn <span class="accent">Practice</span></h1>
       <p>英语口语练习 · 先自己翻译，再对照参考答案</p>
     </header>
-
     <div class="difficulty-row">
       <span class="badge lv1" id="levelBadge"><span class="dot"></span><span id="levelText">初级</span></span>
     </div>
-
     <div class="sentence-box">
       <p class="col-label">中文句子</p>
       <p class="sentence" id="sentence">加载中…</p>
       <p class="source" id="source" hidden></p>
     </div>
-
     <div class="btn-row">
       <button class="btn ghost" id="translateBtn">翻译</button>
       <button class="btn secondary" id="compareBtn">对比答案</button>
     </div>
-
     <div class="en-box" id="enBox" hidden>
       <p class="col-label">参考答案 English</p>
       <p class="translation" id="translationText"></p>
     </div>
-
     <div class="answer-area">
       <label for="userInput">我的翻译（写在横线上）</label>
       <textarea id="userInput" rows="1" placeholder="在这里写下你的英文翻译……"></textarea>
     </div>
-
     <div class="result" id="result" hidden>
       <p class="score-line" id="scoreLine"></p>
       <div class="two-col">
@@ -272,7 +192,6 @@
   </button>
 
   <script>
-    // 经典美剧台词（固定，带原版英文与出处）
     const TV_QUOTES = [
       { zh: "我们当时处于分手状态！", level: 2, en: "We were on a break!", src: "《老友记》Friends" },
       { zh: "最近怎么样？", level: 1, en: "How you doin'?", src: "《老友记》Friends" },
@@ -301,7 +220,6 @@
       { zh: "我是那个很酷的爸爸。", level: 2, en: "I'm the cool dad.", src: "《摩登家庭》Modern Family" }
     ];
 
-    // 生活情景句模板：随机填槽生成中文，再交给在线翻译接口
     const SCENARIO_TEMPLATES = [
       { text: "我要一杯{size}的{drink}，{opt}。", level: 1, slots: { size: ["大杯", "中杯", "小杯"], drink: ["冰美式", "拿铁", "卡布奇诺", "柠檬茶", "奶茶", "气泡水", "橙汁", "摩卡", "抹茶拿铁", "美式", "椰子水", "热巧克力"], opt: ["不加糖", "少冰", "多放奶", "正常甜度", "去冰", "常温"] } },
       { text: "我想点一份{food}，{note}。", level: 1, slots: { food: ["麻辣烫", "牛肉面", "扬州炒饭", "汉堡套餐", "蔬菜沙拉", "小笼包", "水饺", "蛋炒饭", "火锅", "烤鱼", "披萨", "意面", "寿司", "三明治", "皮蛋瘦肉粥", "煎饼果子", "螺蛳粉", "黄焖鸡米饭", "炸鸡", "关东煮"], note: ["不要香菜", "少放辣", "多放辣", "不放葱", "打包带走", "少放盐", "多放酱", "不要蒜"] } },
@@ -350,10 +268,41 @@
       { text: "今天{weather}，出门记得带{thing}。", level: 2, slots: { weather: ["要下雨", "风很大", "很冷", "很热"], thing: ["伞", "外套", "帽子", "水"] } },
       { text: "我们{time}在{place}见，怎么样？", level: 2, slots: { time: ["下午三点", "晚上七点", "明天中午"], place: ["老地方", "咖啡店", "地铁口"] } },
       { text: "我的手机{problem}了，能帮我看看吗？", level: 2, slots: { problem: ["连不上网", "死机", "没电", "进水"] } },
-      { text: "这件事让我{emotion}，真的{reaction}。", level: 2, slots: { emotion: ["很生气", "特别开心", "有点失望"], reaction: ["无语了", "睡不着", "想哭"] } }
+      { text: "这件事让我{emotion}，真的{reaction}。", level: 2, slots: { emotion: ["很生气", "特别开心", "有点失望"], reaction: ["无语了", "睡不着", "想哭"] } },
+      { text: "我想预约{thing}，最快什么时候有空？", level: 2, slots: { thing: ["洗牙", "体检", "理发", "做指甲"] } },
+      { text: "附近有{place}吗？我想去{action}。", level: 2, slots: { place: ["健身房", "洗衣店", "药房", "打印店"], action: ["办卡", "洗衣服", "买点药", "打印东西"] } }
     ];
 
-    // 网感句模板：随机填槽生成中文，再交给在线翻译接口
+    const WORK_TEMPLATES = [
+      { text: "今天地铁{adj}，我差点{result}。", level: 2, slots: { adj: ["挤爆了", "晚点了", "停运了", "人山人海"], result: ["迟到", "没挤上去", "站了一路", "赶不上会议"] } },
+      { text: "我早上{time}就出门了，结果还是堵在路上。", level: 2, slots: { time: ["六点半", "七点", "七点半", "八点"] } },
+      { text: "老板临时拉了个会，我{action}。", level: 2, slots: { action: ["午饭都没吃上", "又得加班", "周末的计划泡汤了", "到现在才下班"] } },
+      { text: "这个需求{adj}，我得再{action}。", level: 2, slots: { adj: ["改了三遍", "又变了", "完全没写清楚", "上线前一天才提"], action: ["确认一下", "排个期", "找人帮忙", "重做一版"] } },
+      { text: "我今天{num}个会，{thing}都还没做。", level: 2, slots: { num: ["#4-8"], thing: ["方案", "周报", "邮件", "数据"] } },
+      { text: "这个项目的{part}还没定，先{action}。", level: 2, slots: { part: ["预算", "排期", "负责人", "需求"], action: ["别动", "缓一缓", "等通知", "内部对齐一下"] } },
+      { text: "客户那边{action}了，我们得{response}。", level: 2, slots: { action: ["改了需求", "催进度", "砍了预算", "投诉了"], response: ["重新评估", "加班赶", "再谈一轮", "紧急处理"] } },
+      { text: "我手头{num}件事，{task}能不能推到下周？", level: 3, slots: { num: ["#3-6"], task: ["这个任务", "这个评审", "这个汇报", "这个需求"] } },
+      { text: "周报我{status}了，{thing}别忘了发。", level: 2, slots: { status: ["写完", "还没写", "刚交"], thing: ["会议纪要", "数据", "汇报", "总结"] } },
+      { text: "这个方案{colleague}觉得{opinion}，你怎么看？", level: 2, slots: { colleague: ["老王", "产品", "技术", "领导"], opinion: ["可行", "太激进", "预算不够", "风险太大"] } },
+      { text: "你能帮我{action}吗？我这边{reason}。", level: 2, slots: { action: ["盯一下", "对接一下", "补个数据", "回个邮件"], reason: ["实在忙不过来", "临时有事", "请假了", "在出差"] } },
+      { text: "这件事我们{action}吧，别拖了。", level: 2, slots: { action: ["当面聊", "拉个会", "定下来", "拍板"] } },
+      { text: "又加班到{time}，感觉身体被掏空。", level: 2, slots: { time: ["九点", "十点", "十一点", "凌晨"] } },
+      { text: "这份工作{adj}，但{thing}。", level: 2, slots: { adj: ["累", "压力大", "工资低", "没前途"], thing: ["没办法", "先干着", "离家近", "同事还行"] } },
+      { text: "我最近{status}，打算{action}。", level: 3, slots: { status: ["想跳槽", "被内卷得厉害", "天天加班", "有点疲惫"], action: ["骑驴找马", "请个假", "报个班提升一下", "先休息一阵"] } },
+      { text: "领导说这个{thing}周五前必须{action}。", level: 2, slots: { thing: ["方案", "报告", "数据", "项目"], action: ["交", "上线", "定稿", "汇报"] } },
+      { text: "今天被{who}{verb}了一顿，心情{adj}。", level: 2, slots: { who: ["老板", "客户", "领导", "同事"], verb: ["骂", "批", "怼", "催"], adj: ["很差", "很糟", "郁闷", "爆炸"] } },
+      { text: "这个月我{num}天没{thing}了。", level: 2, slots: { num: ["#3-15"], thing: ["好好吃饭", "健身", "早睡", "准点下班"] } },
+      { text: "客户催了{num}遍了，我还没{action}。", level: 2, slots: { num: ["#3-8"], action: ["回复", "定稿", "排期", "验收"] } },
+      { text: "今天开了{num}个会，脑子都{adj}了。", level: 2, slots: { num: ["#4-8"], adj: ["炸", "糊", "木", "转不动"] } },
+      { text: "这个bug{adj}，{action}。", level: 2, slots: { adj: ["复现不了", "太难搞", "很奇怪"], action: ["一时半会修不好", "查不到原因", "只能先绕过"] } },
+      { text: "明天要{action}，我今天得早点{thing}。", level: 2, slots: { action: ["汇报", "出差", "路演", "答辩"], thing: ["准备", "睡", "把材料弄完"] } },
+      { text: "公司{action}了，大家都很{adj}。", level: 2, slots: { action: ["裁员", "降薪", "合并", "搬家"], adj: ["慌", "焦虑", "没底", "迷茫"] } },
+      { text: "这个季度指标{adj}，根本{action}。", level: 3, slots: { adj: ["定得太高", "完全不合理", "翻了一倍"], action: ["完不成", "不现实", "要命"] } },
+      { text: "我跟{who}{action}，想听听你的{thing}。", level: 2, slots: { who: ["老板", "主管", "团队"], action: ["聊了聊", "沟通了一下", "吵了一架"], thing: ["建议", "看法", "想法"] } },
+      { text: "这份{thing}我{action}了，麻烦你{verb}。", level: 2, slots: { thing: ["文档", "合同", "报表", "方案"], action: ["写完", "改完", "整理好"], verb: ["过一眼", "提提意见", "帮忙润色"] } },
+      { text: "最近{thing}，公司里{action}。", level: 2, slots: { thing: ["业务不景气", "项目黄了", "人心浮动"], action: ["都在观望", "好多人想走", "气氛很紧张"] } }
+    ];
+
     const INTERNET_TEMPLATES = [
       { text: "我昨天刷到一条视频，{content}，直接{reaction}。", level: 2, slots: { content: ["博主三秒就火了", "up主直播翻车", "素人改造太惊艳", "剪辑太丝滑", "一只猫突然抢镜", "主播读评论读到破防"], reaction: ["破防了", "上头了", "笑到不行", "起了一身鸡皮疙瘩", "直接收藏"] } },
       { text: "他发的那条动态，评论区全是{slang}。", level: 1, slots: { slang: ["玩梗", "求攻略", "催更", "彩虹屁", "嘴替", "破防"] } },
@@ -374,9 +323,12 @@
       { text: "刷到这条{thing}，我瞬间{reaction}。", level: 2, slots: { thing: ["热搜", "新闻", "动态"], reaction: ["清醒了", "破防了", "释怀了"] } },
       { text: "评论区有人说{comment}，我直接{reaction}。", level: 2, slots: { comment: ["这波不亏", "求链接", "学到了"], reaction: ["点赞", "收藏", "笑死"] } },
       { text: "这个博主{action}，粉丝直接{result}。", level: 2, slots: { action: ["停更了一个月", "换了风格", "官宣恋情"], result: ["破防", "取关", "送上祝福"] } },
-      { text: "当{word}成为一种常态，{thing}。", level: 3, slots: { word: ["内卷", "摆烂", "加班"], thing: ["大家开始重新思考生活", "年轻人越来越想逃离", "打工人开始觉醒"] } }
+      { text: "当{word}成为一种常态，{thing}。", level: 3, slots: { word: ["内卷", "摆烂", "加班"], thing: ["大家开始重新思考生活", "年轻人越来越想逃离", "打工人开始觉醒"] } },
+      { text: "这条评论被顶上{rank}了，下面全是{thing}。", level: 2, slots: { rank: ["热评第一", "置顶"], thing: ["玩梗", "神回复", "吐槽"] } },
+      { text: "刷到{thing}，我一整个{adj}住。", level: 2, slots: { thing: ["这条视频", "这个梗", "这个段子"], adj: ["大无语", "震惊", "破防"] } }
     ];
 
+    const ALL_SCENARIO = SCENARIO_TEMPLATES.concat(WORK_TEMPLATES);
     const LEVELS = { 1: { text: "初级", cls: "lv1" }, 2: { text: "中级", cls: "lv2" }, 3: { text: "高级", cls: "lv3" } };
 
     const sentenceEl = document.getElementById("sentence");
@@ -395,8 +347,25 @@
     const refreshBtn = document.getElementById("refreshBtn");
 
     let current = null;
-    let lastZh = "";
     let translating = false;
+    let quoteDeck = [];
+
+    const SEEN_KEY = "jazlynSeenV2";
+    let seen = new Set();
+    try {
+      const raw = localStorage.getItem(SEEN_KEY);
+      if (raw) seen = new Set(JSON.parse(raw));
+    } catch (e) {}
+
+    function saveSeen() {
+      try {
+        if (seen.size > 12000) {
+          const arr = Array.from(seen);
+          seen = new Set(arr.slice(arr.length - 6000));
+        }
+        localStorage.setItem(SEEN_KEY, JSON.stringify(Array.from(seen)));
+      } catch (e) {}
+    }
 
     function randomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -421,26 +390,36 @@
     }
 
     function genScenario() {
-      return renderTemplate(pickFrom(SCENARIO_TEMPLATES));
+      return renderTemplate(pickFrom(ALL_SCENARIO));
     }
 
     function genInternet() {
       return renderTemplate(pickFrom(INTERNET_TEMPLATES));
     }
 
-    function pickSentence() {
-      for (let attempt = 0; attempt < 30; attempt++) {
-        let item;
-        const roll = Math.random();
-        if (roll < 0.25) {
-          item = pickFrom(TV_QUOTES);
-        } else if (roll < 0.65) {
-          item = genScenario();
-        } else {
-          item = genInternet();
+    function nextQuote() {
+      if (quoteDeck.length === 0) {
+        quoteDeck = TV_QUOTES.slice();
+        for (let i = quoteDeck.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          const t = quoteDeck[i];
+          quoteDeck[i] = quoteDeck[j];
+          quoteDeck[j] = t;
         }
-        if (item.zh !== lastZh) {
-          lastZh = item.zh;
+      }
+      return quoteDeck.pop();
+    }
+
+    function pickSentence() {
+      for (let attempt = 0; attempt < 400; attempt++) {
+        const roll = Math.random();
+        if (roll < 0.15) {
+          return nextQuote();
+        }
+        const item = (roll < 0.65) ? genScenario() : genInternet();
+        if (!seen.has(item.zh)) {
+          seen.add(item.zh);
+          saveSeen();
           return item;
         }
       }
@@ -479,10 +458,19 @@
       translationText.textContent = "";
     }
 
+    const YOUDAO_PROXY = "https://youdao-proxy-hwivfavmoa.cn-hangzhou.fcapp.run";
+
     async function fetchTranslation(text) {
       const src = encodeURIComponent(text);
       const providers = [
-        // 首选：谷歌翻译（挂 VPN 时可用）
+        async () => {
+          if (!YOUDAO_PROXY) throw new Error("no proxy");
+          const r = await fetch(YOUDAO_PROXY + "?q=" + encodeURIComponent(text));
+          if (!r.ok) throw new Error("HTTP " + r.status);
+          const d = await r.json();
+          if (!d || !d.translation) throw new Error("empty");
+          return d.translation;
+        },
         async () => {
           const controller = new AbortController();
           const timer = setTimeout(() => controller.abort(), 5000);
@@ -501,7 +489,6 @@
             clearTimeout(timer);
           }
         },
-        // 备用：MyMemory（国内不挂 VPN 一般可直连）
         async () => {
           const r = await fetch("https://api.mymemory.translated.net/get?q=" + src + "&langpair=zh-CN|en");
           if (!r.ok) throw new Error("HTTP " + r.status);
@@ -511,7 +498,6 @@
           return out;
         }
       ];
-
       let lastErr;
       for (const provider of providers) {
         try {
@@ -538,7 +524,7 @@
         showTranslation(t);
         translateBtn.textContent = "已翻译";
       } catch (e) {
-        translationText.textContent = "翻译失败，请稍后重试或检查网络。";
+        translationText.textContent = "翻译失败，请检查网络（谷歌需挂 VPN）。";
         enBox.hidden = false;
         translateBtn.textContent = "重试";
       } finally {
@@ -582,18 +568,16 @@
         const score = similarity(mine, answer);
         myAnswer.textContent = mine;
         stdAnswer.textContent = answer;
-
         let color, comment;
         if (score >= 80) { color = "#3f8c6f"; comment = "很棒！意思非常接近参考答案 🎉"; }
         else if (score >= 50) { color = "#c08a3e"; comment = "思路对了，再对照一下细节和表达 👍"; }
         else { color = "#c96145"; comment = "差距较大，看看参考答案是怎么表达的 💪"; }
-
         scoreLine.innerHTML =
           '相似度 <span class="num" style="color:' + color + '">' + score +
           '%</span> · ' + comment;
         result.hidden = false;
       } catch (e) {
-        alert("参考答案获取失败，请稍后重试或检查网络。");
+        alert("参考答案获取失败，请检查网络（谷歌需挂 VPN）。");
       } finally {
         compareBtn.disabled = false;
         compareBtn.textContent = "对比答案";
